@@ -18,7 +18,6 @@ type AuthContextData = {
     signIn(credentials: SignInCredentials): Promise<void>;
     user: User;
     isAuthenticated: boolean;
-
 };
 
 type AuthProviderProps = {
