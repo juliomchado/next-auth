@@ -15,7 +15,7 @@ export default function Home() {
     const data = {
       email,
       password,
-    }
+    };
 
     await signIn(data);
   }
