@@ -1,20 +1,14 @@
-import { destroyCookie } from "nookies";
 import { useEffect } from "react";
+import { Can } from "../components/Can";
 import { useAuth } from "../context/AuthContext"
-import { useCan } from "../hooks/useCan";
 import { setupApiClient } from "../services/api";
 import { api } from "../services/apiClient";
-import { AuthTokenError } from "../services/errors/AuthTokenError";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
 
     const { user } = useAuth();
 
-    const userCanSeeMatrics = useCan({
-        permissions: ['metrics.list'],
-        roles: ['administrator', 'editor']
-    });
 
     useEffect(() => {
         api.get('/me')
@@ -26,7 +20,9 @@ export default function Dashboard() {
         <>
             <h1>Dashboard: {user?.email}</h1>
 
-            { userCanSeeMatrics && (<div>Métricas</div>) }
+            <Can permissions={['metrics.list']}>
+                <div>Métricas</div>
+            </Can>
         </>
     )
 };
